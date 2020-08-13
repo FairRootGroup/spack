@@ -210,6 +210,9 @@ def _expand_matrix_constraints(object, specify=True):
             spack.variant.substitute_abstract_variants(test_spec)
         except spack.variant.UnknownVariantError:
             pass
+        except spack.util.naming.InvalidModuleNameError:
+            pass
+
         if any(test_spec.satisfies(x) for x in excludes):
             continue
 
