@@ -24,6 +24,7 @@ import time
 import traceback
 
 import llnl.util.tty.log as log
+from llnl.util.lang import fork_context
 
 from spack.util.executable import which
 
@@ -232,7 +233,7 @@ class PseudoShell(object):
         ``child_function``.
 
         """
-        self.proc = multiprocessing.Process(
+        self.proc = fork_context.Process(
             target=PseudoShell._set_up_and_run_master_function,
             args=(self.master_function, self.child_function,
                   self.controller_timeout, self.sleep_time),
